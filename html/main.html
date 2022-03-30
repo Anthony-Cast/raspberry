@@ -42,6 +42,53 @@
         </div>
     </div>
 </div>
+    
+<form action="" method="post" class="mt-4" style="align-items: center;">
+    
+    <h1 style="margin-top: 20px;margin-bottom: 20px;margin-left: 20px;"><b>Ingresar una fecha para revisar el historial de los recursos: </b> </h1>
+    <div style="margin-left: 20px;" class="row">
+        <input name="fecha"id="fecha" type="date">
+        <select name="formato" id="formato">
+        <option value="ambos">Ambos formatos
+        </option> 
+        <option value="pdf">PDF</option>
+        <option value="mp4">MP4</option>
+    </select>
+    <button style="width:200px" type="submit" class="rounded-md bg-green-500">Ingresar filtros</button>
+    </div>
+    
+</form>
+
+<canvas style="width: 100%;height: 250px;" id="myChart"></canvas>
+
+
+<script>
+    
+    var datos = {{{registros}}}
+    var fecha = {{{fecha}}}
+    var mensaje ={{{formato}}}
+    console.log(datos)
+    console.log(mensaje)
+    var archivos = []
+    var visitas = []
+    datos.map((dato) =>{
+        archivos.push(dato.archivo);
+        visitas.push(dato.visitas);
+    });
+    var ctx = document.getElementById("myChart").getContext("2d");
+        var myNewChart = new Chart(ctx,{
+        type:'bar',
+        data: {
+        labels: archivos,
+        datasets: [
+                {
+                label: "Archivos visitados el " +fecha +" "+mensaje,
+                data: visitas
+                }
+            ]
+        }   
+    });
+</script>
 
 <script>
     var tabla ={{{resultados}}}
