@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body class="bg-gray-100">
+    <nav class="flex py-5 bg-green-500 text-white px-24">
+        <div class="w-1/2 px-12 mr-auto">
+            <p class="text-2x1 font-bold">My Application</p>
+        </div>
+        <ul class="w-1/2 px-1/6 ml-auto flex justify-end pt-1">
+            <li class="nav-item px-4">
+                <a href="/tabla" class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded-md">Ver 10 recursos más utilizados</a>
+                <a href="/recursos" class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded-md">Ver por fecha</a>
+            </li>
+        </ul>
+    </nav>    
+</body>
+<div style="padding-top: 20px;">
+    <div class="max-w-3x1 mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <table style="text-align: center;" class="table-fixed w-full" id="tablaRegistros" style="display: none;">
+                <thead>
+                    <tr class="bg-green-500 text-white">
+                        <th class="w-20 py-4" >Archivo</th>
+                        <th class="w-1/2 py-4">Visitas</th>
+                        <th class="w-1/2 py-4">Formato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tabla ={{{resultados}}}
+    var llenarTabla = document.getElementById("tablaRegistros").getElementsByTagName('tbody')[0]
+    for(var i=0;i<tabla.length;i++){
+        console.log(tabla[i].archivo)
+        llenarTabla.insertRow().innerHTML = `
+            <td class="py-3 px-6">`+tabla[i].archivo+`</td>
+            <td class="p-3">`+tabla[i].visitas+`</td>
+            <td class="p-3" >`+"<b>"+tabla[i].formato+`</td>`;
+    }
+    document.getElementById("tablaRegistros").style.display="block";
+</script>  
+</html>
