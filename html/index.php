@@ -19,11 +19,20 @@ if($db){
 
 ?>
 <?php
+function nuevaGrafica(){
 	$paramsFecha = explode("-",$_POST["fecha"]);
 	$formato=$_POST["formato"];
 	$sql = "select archivo, count(id) as visitas from registros where dia=$paramsFecha[2] and mes=paramsFecha[1]and anio=$paramsFecha[0] group by archivo";
-	
-
+	$result=$db->query($sql);
+	while($row=$result->fetchArray(SQLITE3_ASSOC)){
+		array_push($archivos,$row["archivo"]);
+		array_push($visitas,$row["visitas"]);
+	}
+	$data = array();
+	array_push($data,$archivos);
+	array_push($data,$visitas);
+	echo $data;
+}
 ?>
 
 <?DOCTYPE html>
@@ -65,7 +74,7 @@ if($db){
         <option value="pdf">PDF</option>
         <option value="mp4">MP4</option>
     </select>
-    <button style="width:200px" type="submit" class="rounded-md bg-green-500">Ingresar filtros</button>
+    <button style="width:200px" type="submit" class="rounded-md bg-green-500" onclick="nuevaGrafica()">Ingresar filtros</button>
     </div>
     
 </form>
