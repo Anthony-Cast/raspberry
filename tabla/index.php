@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+
+<?php
+class BaseDatos extends SQLite3{
+	function __construct(){
+		$this->open("/var/www/html/raspberry.db");
+	}
+
+	$db= new BaseDatos();
+	if($db){
+		echo "<p>Se conecto a base de datos</p>"
+	}
+	else{
+		echo "<p>hubo un error</p>"
+	}
+
+}
+?>
+
+<?DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +26,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
@@ -25,6 +42,8 @@
         </ul>
     </nav>    
 </body>
+
+<!--
 <div style="padding-top: 20px;">
     <div class="max-w-3x1 mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -42,7 +61,7 @@
         </div>
     </div>
 </div>
-    
+-->
 <form action="" method="post" class="mt-4" style="align-items: center;">
     
     <h1 style="margin-top: 20px;margin-bottom: 20px;margin-left: 20px;"><b>Ingresar una fecha para revisar el historial de los recursos: </b> </h1>
