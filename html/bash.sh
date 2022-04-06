@@ -1,8 +1,11 @@
 #!/bin/bash
+
+<< 'COMMENT'
 cd html
 sqlite3 raspberry.db "create table if not exists registros(id integer primary key autoincrement,anio text not null,mes text not null,dia text not null,hora text not null,archivo text not null,formato not null);" ".quit"
 
 #rm -f archivo.txt
+
 diaActual=$(date +"%d")
 mesActual=$(date +"%b")
 
@@ -30,4 +33,9 @@ grep -E '.pdf HTTP|.mp4 HTTP' /var/log/nginx/kolibri_uwsgi.log | while read -r l
 done
 
 sqlite3 raspberry.db "select * from registros;"
+COMMENT
 
+cd /~/.kolibri/content/databases
+ls | grep -E '.sqlite3' | while read -r line ; do
+	echo 'linea : '$line
+done
