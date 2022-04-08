@@ -1,4 +1,5 @@
 #primero obetenemos los registros del txt
+
 from google.cloud import bigquery
 import os
 import json
